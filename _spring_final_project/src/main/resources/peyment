@@ -1,0 +1,61 @@
+2023-12-15
+
+//예약
+CREATE TABLE `pay_order_user` (
+  `order_num` bigint NOT NULL AUTO_INCREMENT,
+  `id` varchar(45) NOT NULL,
+  `pk_no` bigint DEFAULT NULL,
+  `product_name` varchar(255) DEFAULT 'default_value',
+  `order_date` datetime DEFAULT NULL,
+  `total_price` varchar(45) DEFAULT NULL,
+  `imp_uid` varchar(100) DEFAULT NULL,
+  `user_count` int DEFAULT NULL,
+  `sayong_pointeu` bigint DEFAULT NULL,
+  `confirmation` char(1) DEFAULT 'N',
+  `airplane` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`order_num`)
+)
+
+//결제
+CREATE TABLE `sc_pay` (
+  `pay_num` bigint NOT NULL AUTO_INCREMENT,
+  `pay_method` varchar(45) DEFAULT NULL,
+  `pay_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `pay_amount` bigint DEFAULT NULL,
+  `order_num` bigint DEFAULT NULL,
+  `id` varchar(45) DEFAULT NULL,
+  `pk_no` bigint DEFAULT NULL,
+  `product_name` varchar(50) DEFAULT NULL,
+  `sayong_pointeu` bigint DEFAULT NULL,
+  PRIMARY KEY (`pay_num`),
+  KEY `fk_order_num_idx` (`order_num`),
+  CONSTRAINT `fk_order_num` FOREIGN KEY (`order_num`) REFERENCES `pay_order_user` (`order_num`) ON DELETE CASCADE ON UPDATE CASCADE
+)
+
+//멤버쉽
+CREATE TABLE `membership` (
+  `id` varchar(50) NOT NULL,
+  `total_price` bigint DEFAULT '0',
+  `point` int DEFAULT '0',
+  `grade` varchar(50) DEFAULT '브론즈',
+  PRIMARY KEY (`id`)
+)
+
+//항공
+CREATE TABLE `free_ticket_order` (
+  `order_num` bigint NOT NULL,
+  `id` varchar(100) DEFAULT NULL,
+  `airplane` varchar(1) DEFAULT 'A',
+  `arrival` varchar(100) DEFAULT NULL,
+  `departure_day` varchar(100) DEFAULT NULL,
+  `arrival_day` varchar(100) DEFAULT NULL,
+  `seat_type` varchar(100) DEFAULT NULL,
+  `flight_type` varchar(100) DEFAULT NULL,
+  `ft_price` mediumtext,
+  `ft_peple` mediumtext,
+  `city_code` varchar(45) DEFAULT NULL,
+  `gate` varchar(45) DEFAULT NULL
+) 
+
+
+

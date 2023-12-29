@@ -1,0 +1,60 @@
+CREATE TABLE `attendance` (
+  `ev_no` bigint NOT NULL,
+  `max_attendance_count` int NOT NULL,
+  `point` int NOT NULL,
+  `special_point_count` int NOT NULL,
+  `special_point` int NOT NULL,
+  `full_attendance_prize` int NOT NULL
+)
+
+CREATE TABLE `attendance_history` (
+  `ev_no` bigint NOT NULL,
+  `id` varchar(100) NOT NULL,
+  `attendance_date` date NOT NULL
+)
+
+CREATE TABLE `event` (
+  `ev_no` bigint NOT NULL AUTO_INCREMENT,
+  `ev_name` varchar(100) DEFAULT NULL,
+  `ev_start` datetime NOT NULL,
+  `ev_end` datetime NOT NULL,
+  `ev_content` text NOT NULL,
+  `ev_type` varchar(100) NOT NULL,
+  PRIMARY KEY (`ev_no`)
+)
+
+CREATE TABLE `review` (
+  `rv_no` bigint NOT NULL AUTO_INCREMENT,
+  `title` varchar(250) DEFAULT NULL,
+  `content` text NOT NULL,
+  `reg_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `read_count` int DEFAULT '0',
+  `secret` char(1) DEFAULT NULL,
+  `id` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`rv_no`)
+)
+
+CREATE TABLE `review_comment` (
+  `rc_no` bigint NOT NULL AUTO_INCREMENT,
+  `rc_content` text NOT NULL,
+  `rc_reg_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `rv_no` bigint NOT NULL,
+  `rc_writer` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`rc_no`)
+)
+
+CREATE TABLE `review_history` (
+  `rv_no` bigint NOT NULL,
+  `user_no` varchar(100) NOT NULL
+)
+
+CREATE TABLE `roulette` (
+  `ev_no` varchar(100) NOT NULL,
+  `prizes` varchar(100) NOT NULL
+)
+
+create table roulette_history(
+ev_no bigint not null,
+id varchar(100)not null,
+prize varchar(100)not null,
+ date date not null);
